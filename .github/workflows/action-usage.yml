@@ -29,7 +29,22 @@ jobs:
           push_results_to_repo: true
 
       # example: output
-      - run: |
-          echo "${{ steps.action-uses.outputs.json_result }}"
+      - name: output csv
+        run: |
           echo "${{ steps.action-uses.outputs.csv_result }}"
+
+      # example: output
+      - name: output json
+        run: |
+          echo "${{ steps.action-uses.outputs.json_result }}"
+
+      # example: output
+      - name: output md
+        run: |
           echo "${{ steps.action-uses.outputs.md_result }}"
+          
+      # redirect to job output
+      - name: output md
+        run: |
+          echo "${{ steps.action-uses.outputs.md_result }}" >> $GITHUB_STEP_SUMMARY
+
