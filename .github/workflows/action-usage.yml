@@ -1,0 +1,35 @@
+name: 🚀 GitHub Actions usage report 
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Runs at 00:42 UTC on the first of every month
+    #
+    #        ┌─────────────── minute
+    #        │  ┌──────────── hour
+    #        │  │ ┌────────── day (month)
+    #        │  │ │ ┌──────── month
+    #        │  │ │ │ ┌────── day (week)
+    - cron: '42 0 1 * *'
+
+jobs:
+  enterprise:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: ActionsDesk/report-action-usage@v2.5.1
+        id: action-uses
+        with:
+          token: ${{ secrets.ENTERPRISE_ADMIN_TOKEN }}
+          enterprise: avocado-corp
+          csv: reports/actions-used.csv
+          md: reports/actions-used.md
+          push_results_to_repo: true
+
+      # example: output
+      - run: |
+          echo "${{ steps.action-uses.outputs.json_result }}"
+          echo "${{ steps.action-uses.outputs.csv_result }}"
+          echo "${{ steps.action-uses.outputs.md_result }}"
