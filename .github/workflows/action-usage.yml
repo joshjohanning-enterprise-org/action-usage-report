@@ -23,7 +23,7 @@ jobs:
         id: action-uses
         with:
           token: ${{ secrets.ENTERPRISE_ADMIN_TOKEN }}
-          enterprise: avocado-corp
+          enterprise: FastTrack-GHEC
           csv: reports/actions-used.csv
           md: reports/actions-used.md
           push_results_to_repo: true
